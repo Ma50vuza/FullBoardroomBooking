@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='styles/emptyconference.jpg') }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+        }
+        .dashboard-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            max-width: 600px;
+            margin: 60px auto;
+        }
+        .profile-card {
+            background: rgba(0, 0, 0, 0.671);
+            color: black;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.753);
+            max-width: 400px;
+            min-width: 320px;
+            margin: 0 auto;
+            padding: 32px 24px;
+            text-align: center;
+        }
+        .profile-card h3 {
+            margin-bottom: 18px;
+            font-size: 1.6em;
+            color: whitesmoke;
+        }
+        .profile-details {
+            text-align: left;
+            margin-top: 18px;
+            color: rgb(173, 8, 8);
+        }
+        .profile-details li {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            background: rgba(0, 0, 0, 0.671);
+            color: whitesmoke;
+        }
+        .view-bookings-btn {
+            display: inline-block;
+            margin-top: 24px;
+            padding: 10px 22px;
+            background: grey;
+            color: whitesmoke;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1em;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .view-bookings-btn:hover {
+            background: cyan;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 99%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px 40px;
+        }
+        .navbar .logo {
+            height: 50px;
+        }
+        .navbar nav a {
+            color: black;
+            margin-right: 18px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1em;
+            transition: color 0.2s;
+        }
+        .navbar nav a:last-child {
+            margin-right: 10;
+        }
+        .navbar nav a:hover {
+            color: cyan;
+        }
+    </style>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="navbar" position="fixed">
+            <img src="{{ url_for('static', filename='styles/mzanstilogo.jpeg') }}" alt="Logo" class="logo">
+            <nav>
+                <a href="{{ url_for('dashboard') }}"></a>
+                <a href="{{ url_for('dashboard') }}"></a>
+                <a href="{{ url_for('dashboard') }}"></a>
+                <a href="{{ url_for('dashboard') }}"></a>
+                <a href="{{ url_for('login') }}">Logout</a>
+            </nav>
+        </div>
+    </header>
+    <div class="dashboard-container">
+        <div class="profile-card">
+            <h3>Welcome, {{ username }}</h3>
+            <ul class="profile-details">
+                <li><strong>Email:</strong> {{ email }}</li>
+                <li><strong>Department:</strong> {{ department }}</li>
+                <li><strong>Company:</strong> {{ company }}</li>
+            </ul>
+            <div style="margin-top: 24px;">
+                <a href="{{ url_for('viewBookings') }}" class="view-bookings-btn">View Bookings</a>
+                <a href="{{ url_for('addBooking') }}" class="view-bookings-btn">Add Booking</a>
+                <a href="{{ url_for('viewBookings') }}" class="view-bookings-btn">Cancel Booking</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Booking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevents page scrolling */
+        }
+        body {
+            background-image: url("{{ url_for('static', filename='styles/clockandcalendar.jpeg') }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+        }
+        .add-booking-container {
+            color: black;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+            max-width: 700px;
+            /* Center vertically and horizontally, no scroll */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 32px 24px;
+        }
+        .add-booking-container h2 {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .booking-form label {
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 4px;
+        }
+        .booking-form input, .booking-form select {
+            width: 100%;
+            padding: 7px;
+            border-radius: 4px;
+            border: none;
+            margin-bottom: 10px;
+        }
+        .booking-form input[type="submit"] {
+            background: grey;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .booking-form input[type="submit"]:hover {
+            background: cyan;
+        }
+        .back-link {
+            display: block;
+            margin-top: 18px;
+            text-align: center;
+            color: black;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="color: black;">Add Booking(s)</h2>
+    <div class="add-booking-container">
+        
+        <form class="booking-form" method="POST">
+            <label for="room_name">Room:</label>
+            <select name="room_name" required>
+                {% for room in rooms %}
+                    <option value="{{ room['name'] }}">{{ room['name'] }}</option>
+                {% endfor %}
+            </select>
+            <label for="start_time">Start Time:</label>
+            <input type="datetime-local" name="start_time" required>
+            <label for="end_time">End Time:</label>
+            <input type="datetime-local" name="end_time" required>
+            <label for="purpose">Purpose:</label>
+            <input type="text" name="purpose" required>
+            <label for="attendees">Attendees (comma-separated emails):</label>
+            <input type="text" name="attendees">
+            <input type="submit" value="Book Room">
+        </form>
+        <a href="{{ url_for('viewBookings') }}" class="back-link">View All Bookings</a>
+    </div>
+</body>
+</html>

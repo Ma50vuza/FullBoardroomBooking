@@ -1,0 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 30px;
+    max-width: 700px;
+    margin: auto;
+    color: white;
+}
+
+/* Make headers readable over background */
+h1, h2 {
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* Semi-transparent forms for readability */
+form {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border: 1px solid #333;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+form input, form select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    color: #000;
+}
+
+form input[type="submit"], form button {
+    background-color: grey;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 50px;
+    font: bold 20px Arial, sans-serif;
+}
+
+form input[type="submit"]:hover, form button:hover {
+    background-color: darken(grey, 10%);
+}
+
+a {
+    display: inline-block;
+    margin-top: 10px;
+    color: white;
+    text-decoration: none;
+    font: bold 16px Arial, sans-serif;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #666;
+    border-radius: 6px;
+}
+/* Navbar styles */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 0px 10px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.navbar nav a {
+    color:white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.navbar nav a:hover {
+    color: white;
+}
+
+.logo {
+    height: 50px;
+    border-radius: 4px;
+}
+body {
+    padding-top: 0px;
+}
+.flashes {
+    margin: 20px auto;
+    max-width: 500px;
+    text-align: center;
+}
+.flash-message {
+    background: #222;
+    color: #fff;
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
