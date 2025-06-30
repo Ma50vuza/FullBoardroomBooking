@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Booking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevents page scrolling */
+        }
+        body {
+            background-image: url("{{ url_for('static', filename='styles/clockandcalendar.jpeg') }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+        }
+        .add-booking-container {
+            color: black;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+            max-width: 700px;
+            /* Center vertically and horizontally, no scroll */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 32px 24px;
+        }
+        .add-booking-container h2 {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .booking-form label {
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 4px;
+        }
+        .booking-form input, .booking-form select {
+            width: 100%;
+            padding: 7px;
+            border-radius: 4px;
+            border: none;
+            margin-bottom: 10px;
+        }
+        .booking-form input[type="submit"] {
+            background: grey;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .booking-form input[type="submit"]:hover {
+            background: black;
+        }
+        .back-link {
+            display: block;
+            margin-top: 18px;
+            text-align: center;
+            color: black;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="add-booking-container">
+        <h2>Update Booking</h2>
+        
+        <form method="POST" class="booking-form">
+            <label for="purpose">Purpose:</label>
+            <input type="text" name="purpose" value="{{ booking.purpose }}" required>
+
+            <label for="start_time">Start Time:</label>
+            <input type="datetime-local" name="start_time" value="{{ booking.start_time|replace(' ', 'T') }}" required>
+
+            <label for="end_time">End Time:</label>
+            <input type="datetime-local" name="end_time" value="{{ booking.end_time|replace(' ', 'T') }}" required>
+
+            <label for="attendees">Attendees (comma-separated):</label>
+            <input type="text" name="attendees" value="{{ booking.attendees|join(', ') if booking.attendees else '' }}">
+
+            <button type="submit">Save Changes</button>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div>
+                    {% for category, message in messages %}
+                        <div style="color: {% if category == 'success' %} #4caf50 {% else %} #ff4444{% endif %}; margin-bottom: 10px;">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        </form>
+        <a href="{{ url_for('viewBookings') }}" class="back-link">Back to Bookings</a>
+    </div>
+</body>
+</html>

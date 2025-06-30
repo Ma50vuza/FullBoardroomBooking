@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Bookings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 10px;
+            padding: 10px;
+            /*overflow: hidden; /* Prevents page scroll */
+        }
+        body {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-image: url("{{ url_for('static', filename='styles/clockandcalendar.jpeg') }}");
+        }
+        .bookings-section {
+            color: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+            max-width: 600px;
+            /* Center vertically and horizontally, no scroll */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 32px 50px;
+        }
+        .bookings-section h3 {
+            margin-bottom: 16px;
+            font-size: 1.3em;
+        }
+        .bookings-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .booking-card {
+            background: rgba(0, 0, 0, 0.671);
+            color: white;
+            border-radius: 16px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.753);
+            min-width: 150px;
+            padding: 32px 32px;
+            text-align: center;
+        }
+        .booking-actions {
+            margin-top: 10px;
+            margin-bottom: 0px;
+        }
+        .action-btn {
+            margin-bottom: 0px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .delete-btn {
+            background: grey;
+            color: #fff;
+        }
+        .update-btn {
+            background: grey;
+            color: #fff;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 18px;
+            padding: 8px 18px;
+            background: grey;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1em;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .back-btn:hover {
+            background: black;
+        }
+        /* Pagination styles */
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .pagination a {
+            color: #fff;
+            background: #2980b9;
+            padding: 8px 16px;
+            border-radius: 5px;
+            margin: 0 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .pagination a:hover {
+            background: #4caf50;
+        }
+        .pagination .current-page {
+            background: #222;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 5px;
+            margin: 0 4px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>All Bookings</h1>
+    <div class="bookings-section">
+        <a href="{{ url_for('dashboard') }}" class="back-btn">Back to Profile</a>
+        <a href="{{ url_for('addBooking') }}" class="back-btn">Add Booking</a>
+        <div class="bookings-list">
+            {% if bookings %}
+                {% for b in bookings %}
+                    <div class="booking-card">
+                        <div><strong>Purpose:</strong> {{ b.purpose }}</div>
+                        <div><strong>Start:</strong> {{ b.start_time }}</div>
+                        <div><strong>End:</strong> {{ b.end_time }}</div>
+                        <div><strong>Attendees:</strong> {{ b.attendees|join(', ') if b.attendees else '' }}</div>
+                        {% if b.user_id == user_id %}
+                            <div class="booking-actions">
+                                <form method="POST" action="{{ url_for('deleteBooking', booking_id=b.booking_id) }}" style="display:inline;">
+                                    <button type="submit" class="action-btn delete-btn" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</button>
+                                </form>
+                                <form method="GET" action="{{ url_for('updateBooking', booking_id=b.booking_id) }}" style="display:inline;">
+                                    <button type="submit" class="action-btn delete-btn">Update</button>
+                                </form>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No bookings found.</p>
+            {% endif %}
+        </div>
+        {% if total and per_page %}
+            <div class="pagination">
+                {% if page > 1 %}
+                    <a href="{{ url_for('viewBookings', page=page-1) }}">Previous</a>
+                {% endif %}
+                <span class="current-page">Page {{ page }} of {{ (total // per_page) + (1 if total % per_page else 0) }}</span>
+                {% if page * per_page < total %}
+                    <a href="{{ url_for('viewBookings', page=page+1) }}">Next</a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
