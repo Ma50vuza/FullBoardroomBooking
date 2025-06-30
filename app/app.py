@@ -281,5 +281,5 @@ def deleteBooking(booking_id):
         flash('Failed to delete booking. Please try again.')
     return redirect(url_for('viewBookings'))
 
-if __name__ == '__main__':
-    app.run(debug=True)
+#if __name__ == '__main__':
+ #   app.run(debug=True)
