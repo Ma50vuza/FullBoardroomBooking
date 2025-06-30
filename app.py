@@ -100,7 +100,7 @@ def addBooking():
         response_message = booking_response.json()
 
         if booking_response.status_code == 201:
-            flash('Booking successful.')
+           
             return redirect(url_for('viewBookings'))
         else:
             flash(response_message.get("error"))
