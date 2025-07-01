@@ -18,8 +18,8 @@
             background-position: center;
         }
         .add-booking-container {
-            color: black;
-            border-radius: 16px;
+            color: white;
+            border-radius: 10px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.3);
             max-width: 700px;
             /* Center vertically and horizontally, no scroll */
@@ -40,12 +40,26 @@
             margin-bottom: 4px;
         }
         .booking-form input, .booking-form select {
-            width: 100%;
+            width: 95%;
             padding: 7px 7px;
             border-radius: 4px;
             border: none;
             margin-bottom: 10px;
         }
+        .booking-form select {
+            width: 100%;
+            background: #f5f5f5;
+            color: #333;
+            border: 1px solid #bbb;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 1em;
+            appearance: none; /* Removes default arrow in most browsers */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
         .booking-form input[type="submit"] {
             background: grey;
             color: #fff;
@@ -60,13 +74,13 @@
             display: block;
             margin-top: 18px;
             text-align: center;
-            color: black;
+            color: white;
             text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <h2 style="color: black;">Add Booking(s)</h2>
+    <h1 style="color: white;">Add Booking(s)</h1>
     <div class="add-booking-container">
         <form class="booking-form" method="POST">
             <label for="room_name">Room:</label>
